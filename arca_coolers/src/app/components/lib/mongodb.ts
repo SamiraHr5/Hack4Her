@@ -8,18 +8,15 @@ if (!uri) {
 
 const options = {};
 
-let client: MongoClient;
-let clientPromise: Promise<MongoClient>;
-
 declare global {
+  // Esto permite que Next.js reutilice el cliente durante hot reload en desarrollo
   var _mongoClientPromise: Promise<MongoClient> | undefined;
 }
 
-if (!global._mongoClientPromise) {
-  client = new MongoClient(uri, options);
-  global._mongoClientPromise = client.connect();
-}
+// Si ya existe una promesa previa, la reutilizamos (modo dev)
+const clientPromise: Promise<MongoClient> =
+  global._mongoClientPromise ??
+  (global._mongoClientPromise = new MongoClient(uri, options).connect());
 
-clientPromise = global._mongoClientPromise;
 export default clientPromise;
 

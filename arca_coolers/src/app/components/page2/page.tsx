@@ -4,15 +4,20 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
+interface Cooler {
+  cooler_id: string;
+  temperature: number;
+}
+
 export default function Page2() {
-  const [alertas, setAlertas] = useState<any[]>([]);
+  const [alertas, setAlertas] = useState<Cooler[]>([]);
 
   useEffect(() => {
     const fetchCoolers = async () => {
       const res = await fetch("/api/coolers");
       const data = await res.json();
       const alertaCoolers = data.filter(
-        (item: any) => item.temperature < 1.57 || item.temperature > 9.57
+        (item: Cooler) => item.temperature < 1.57 || item.temperature > 9.57
       );
       setAlertas(alertaCoolers);
     };
