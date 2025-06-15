@@ -2,6 +2,7 @@
 
 Este repositorio contiene la solución completa para **predecir las fallas de coolers** de Arca Continental y estimar las ventas proyectadas, combinando análisis exploratorio, modelado de clasificación y un sistema de despliegue de punta a punta.
 
+# ENTREGABLES EN /entragables (csv, .py, presentacion pitch)
 ---
 
 ## Tabla de Contenidos
