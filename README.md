@@ -9,6 +9,7 @@ Tambien se pueden encontrar en la siguiente [branch](https://github.com/SamiraHr
 - Predicción de fallas: https://github.com/SamiraHr5/Hack4Her/tree/main/Modelo_Clasificacion_Github
 - Predicción de ventas: https://github.com/SamiraHr5/Hack4Her/blob/main/EDA/PrediccionVentasMayo.py
 
+<img width="1079" alt="Screenshot 2025-06-15 at 11 36 01" src="https://github.com/user-attachments/assets/504e4dee-c8c8-453e-9b61-e96e8b4a69b2" />
 
 ---
 
