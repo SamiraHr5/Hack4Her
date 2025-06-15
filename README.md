@@ -2,7 +2,14 @@
 
 Este repositorio contiene la solución completa para **predecir las fallas de coolers** de Arca Continental y estimar las ventas proyectadas, combinando análisis exploratorio, modelado de clasificación y un sistema de despliegue de punta a punta.
 
-# ENTREGABLES EN /entragables (csv, .py, presentacion pitch)
+# ENTREGABLES (csv, .py, presentacion pitch):
+Tambien se pueden encontrar en la siguiente [branch](https://github.com/SamiraHr5/Hack4Her/tree/entregables). 
+- Pitch: https://github.com/SamiraHr5/Hack4Her/blob/main/Smart-Coolers-Nest-Pitch.pdf
+- CSV: https://github.com/SamiraHr5/Hack4Her/blob/main/output.csv
+- Predicción de fallas: https://github.com/SamiraHr5/Hack4Her/tree/main/Modelo_Clasificacion_Github
+- Predicción de ventas: https://github.com/SamiraHr5/Hack4Her/blob/main/EDA/PrediccionVentasMayo.py
+
+
 ---
 
 ## Tabla de Contenidos
@@ -11,10 +18,7 @@ Este repositorio contiene la solución completa para **predecir las fallas de co
 3. [Requisitos](#requisitos)
 4. [Entrenamiento y Re‐entrenamiento](#entrenamiento-y-reentrenamiento)
 5. [Inferencia y Predicción](#inferencia-y-predicción)
-6. [Despliegue (Backend + Frontend)](#despliegue-backend-frontend)
-7. [Notas y Mejores Prácticas](#notas-y-mejores-prácticas)
-8. [Créditos](#créditos)
-9. [Licencia](#licencia)
+6. [Licencia](#licencia)
 
 ---
 
