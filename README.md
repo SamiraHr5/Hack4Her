@@ -110,7 +110,7 @@ El script devuelve:
 
 ## Despliegue (Backend + Frontend)
 
-### Backend (Node.js + Express)
+### Backend (Node.js + Express) / MONGO DB como base de datos
 
 1. Copia `.env.example` a `.env` y define:  
    ```env
@@ -150,14 +150,6 @@ La interfaz muestra:
 
 ---
 
-## Créditos
-
-- **Equipo de Data Science** @ Arca Continental  
-  - Analista DS: _Tu Nombre_  
-  - MLOps: _Tu Nombre_  
-  - Ingeniería de Software: _Tu Nombre_
-
----
 
 ## Licencia
 
