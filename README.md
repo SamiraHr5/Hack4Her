@@ -141,14 +141,7 @@ La interfaz muestra:
 
 ---
 
-## Notas y Mejores Prácticas
 
-- **Versionado de datos** con DVC o MLflow (no incluido por simplicidad).  
-- **Docker** opcional: agrega `Dockerfile` y `docker-compose.yml` para entornos reproducibles (ver rama `docker-support`).  
-- **CI/CD** sugerido en GitHub Actions: lint + test + build.  
-- **Métricas de modelo** se registran en `mlruns/` (si usas MLflow).  
-
----
 
 
 ## Licencia
