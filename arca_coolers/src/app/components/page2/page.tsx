@@ -9,8 +9,17 @@ interface Cooler {
   temperature: number;
 }
 
+interface Ticket {
+  cooler_id: string;
+  temperature: number;
+  assigned_to?: string;
+}
+
+const TECHNICIANS = ["T-001 Juan", "T-002 Marta", "T-003 Luis", "T-004 Sofía"];
+
 export default function Page2() {
-  const [alertas, setAlertas] = useState<Cooler[]>([]);
+  const [tickets, setTickets] = useState<Ticket[]>([]);
+  const [draggedTechnician, setDraggedTechnician] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCoolers = async () => {
@@ -19,74 +28,106 @@ export default function Page2() {
       const alertaCoolers = data.filter(
         (item: Cooler) => item.temperature < 1.57 || item.temperature > 9.57
       );
-      setAlertas(alertaCoolers);
+      setTickets(alertaCoolers.map((item: Cooler) => ({ cooler_id: item.cooler_id, temperature: item.temperature })));
     };
     fetchCoolers();
   }, []);
+
+  const handleDrop = (coolerId: string) => {
+    if (!draggedTechnician) return;
+    setTickets((prev) =>
+      prev.map((t) =>
+        t.cooler_id === coolerId ? { ...t, assigned_to: draggedTechnician } : t
+      )
+    );
+    setDraggedTechnician(null);
+  };
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-[#f5f1eb] to-[#e8e3dd] text-neutral-800">
       {/* Encabezado */}
       <header className="bg-white shadow-sm fixed top-0 w-full z-50">
         <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          {/* Logo a la izquierda */}
-          <div className="flex items-center gap-3">
-            <Image
-              src="/arca-logo.svg"
-              alt="Arca Continental Logo"
-              width={130}
-              height={40}
-              priority
-            />
-          </div>
-
-          {/* Título centrado */}
+          <Image
+            src="/arca-logo.svg"
+            alt="Arca Continental Logo"
+            width={130}
+            height={40}
+            priority
+          />
           <div className="absolute left-1/2 transform -translate-x-1/2">
             <span className="font-semibold text-lg text-[#7a3030]">
-              Sistema de Predicción
+              Portal de Predicción
             </span>
           </div>
         </div>
       </header>
 
       {/* Contenido */}
-      <section className="pt-40 px-6 pb-12 max-w-7xl mx-auto text-center">
-        {/* Título */}
-        <h1 className="text-5xl font-bold text-[#7a3030] text-center drop-shadow">
-          Soporte de Coolers
+      <section className="pt-40 px-6 pb-12 max-w-7xl mx-auto">
+        <h1 className="text-5xl font-bold text-[#7a3030] text-center drop-shadow mb-10">
+          Tickets de Soporte
         </h1>
-        <p className="max-w-2xl mx-auto text-lg text-neutral-700 mb-10">
-          Sistema para creación y gestión de soporte a fallas
-        </p>
 
-        {/* Botón de regreso */}
-        <div className="text-center mb-10">
-          <Link
-            href="/"
-            className="inline-block bg-gradient-to-r from-[#9b1b1e] to-[#c0392b] text-white px-6 py-3 rounded-full shadow hover:opacity-90 transition"
-          >
-            ← Volver al inicio
-          </Link>
-        </div>
-
-        {/* Alertas de temperatura */}
-        {alertas.length > 0 && (
-          <div className="mb-12">
-            <h2 className="text-2xl font-semibold text-red-700 mb-4">Coolers con temperatura fuera de rango</h2>
+        <div className="flex flex-col lg:flex-row gap-10">
+          {/* Lista de tickets */}
+          <div className="flex-1">
+            <h2 className="text-xl font-semibold mb-4 text-red-700">
+              Coolers con temperatura fuera de rango
+            </h2>
             <ul className="space-y-4">
-              {alertas.map((item, i) => (
-                <li key={i} className="bg-white rounded-lg p-4 shadow text-left">
-                  <p className="font-semibold text-[#7a3030]">Cooler ID:</p>
-                  <p className="text-sm mb-2">{item.cooler_id}</p>
-                  <p className="text-sm text-red-600">Temperatura: {item.temperature}°C</p>
+              {tickets.map((ticket, i) => (
+                <li
+                  key={i}
+                  className="bg-white p-4 rounded shadow"
+                  onDragOver={(e) => e.preventDefault()}
+                  onDrop={() => handleDrop(ticket.cooler_id)}
+                >
+                  <p className="font-semibold text-[#7a3030]">Cooler ID: {ticket.cooler_id}</p>
+                  <p className="text-sm text-red-600 mb-2">
+                    Temperatura: {ticket.temperature}°C
+                  </p>
+                  <p className="text-sm">
+                    Asignado a:{" "}
+                    <span className="font-medium">
+                      {ticket.assigned_to || "Sin asignar"}
+                    </span>
+                  </p>
                 </li>
               ))}
             </ul>
           </div>
-        )}
 
-        {/* Métricas generales y paneles */}
-        {/* Aquí iría el resto del contenido que ya tenías */}
+          {/* Columna de técnicos con botón fuera del cuadro */}
+          <div className="w-full lg:w-1/3 flex flex-col items-center gap-4">
+            {/* Botón fuera del recuadro */}
+            <Link
+              href="/"
+              className="inline-block bg-gradient-to-r from-[#9b1b1e] to-[#c0392b] text-white px-6 py-2 rounded-full shadow hover:opacity-90 transition"
+            >
+              ← Volver al inicio
+            </Link>
+
+            {/* Técnicos */}
+            <div className="w-full bg-white p-4 rounded shadow h-fit">
+              <h2 className="text-xl font-semibold text-[#7a3030] mb-4 text-center">
+                Técnicos disponibles
+              </h2>
+              <ul className="space-y-3">
+                {TECHNICIANS.map((tech, i) => (
+                  <li
+                    key={i}
+                    draggable
+                    onDragStart={() => setDraggedTechnician(tech)}
+                    className="cursor-move px-4 py-2 bg-red-100 text-red-800 font-medium rounded hover:bg-red-200 transition"
+                  >
+                    {tech}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
   );

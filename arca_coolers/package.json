@@ -9,10 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@hello-pangea/dnd": "^18.0.1",
+    "chart.js": "^4.5.0",
     "mongodb": "^6.17.0",
     "next": "15.3.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "recharts": "^2.15.3",
     "tableau-api": "^2.2.3"
   },
   "devDependencies": {
