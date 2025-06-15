@@ -17,7 +17,7 @@ export async function GET() {
       .toArray();
 
     return NextResponse.json(coolers);
-  } catch (error) {
-    return NextResponse.json({ error: "Error al obtener coolers" }, { status: 500 });
+  } catch {
+  return NextResponse.json({ error: "Error al obtener coolers" }, { status: 500 });
   }
 }

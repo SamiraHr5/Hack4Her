@@ -9,7 +9,6 @@ interface CoolerData {
 
 export default function UserManager() {
   const [coolers, setCoolers] = useState<CoolerData[]>([]);
-  const [nombre, setNombre] = useState("");
 
   const fetchCoolers = async () => {
     try {
